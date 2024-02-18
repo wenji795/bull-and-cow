@@ -1,0 +1,46 @@
+@startuml
+abstract class Player {
+    + makeCode() : String
+    + secretCode() : String
+}
+
+class HumanPlayer {
+    + humanGuess() : String
+}
+
+class ComputerAI {
+    + computerGuess(): String
+}
+
+class Game {
+    - humanPlayer : Player
+    - computerAI: ComputerAI
+    - round : int
+    + start()
+}
+
+class CodeEvaluator {
+    + static evaluateGuess(secretCode : String, guess : String) : int[]
+}
+
+
+Game --> HumanPlayer
+Game --> ComputerAI
+Player <|-- HumanPlayer
+Player <|-- ComputerAI
+@enduml
+
+//Player 类（抽象类）：
+  提供了makeCode()和secretCode()方法，这两个方法将被所有类型的玩家实现。
+
+  HumanPlayer 类和 ComputerAI 类（具体类）：
+  继承自Player类，提供玩家特定的方法实现，如humanGuess()和computerGuess()。
+
+  Game 类：
+  控制游戏流程，持有HumanPlayer和ComputerAI的实例，以及游戏轮数（round）。
+
+  类之间的关系：
+  HumanPlayer和ComputerAI都是Player的子类，表明它们遵循Player的接口。
+  Game类依赖于HumanPlayer和ComputerAI类。
+
+  添加CodeEvaluator类。这个类负责评估玩家的猜测，判断有多少数字是正确的（Bulls）和有多少数字正确但位置不对（Cows）

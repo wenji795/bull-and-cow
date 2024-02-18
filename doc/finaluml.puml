@@ -1,0 +1,67 @@
+@startuml
+
+class Game {
+  -maxAttempts: int
+  -humanPlayer: HumanPlayer
+  -computerAI: ComputerAI
+  -computerSecretCode: String
+  -humanSecretCode: String
+  -result: List<String>
+  +Game()
+  +start(): void
+  +playGame(): void
+  +print(String): void
+  +saveResults(String, int, boolean): void
+  +evaluateGuess(String, String): int[]
+}
+
+abstract class Player {
+  +getSecretCode(): String
+  +makeGuess(): String
+}
+
+
+class HumanPlayer {
+  +getSecretCode(): String
+  +makeGuess(): String
+  -readUserInput(): String
+  -isValidCode(String): boolean
+}
+
+class ComputerAI {
+  +getSecretCode(): String
+  +makeGuess(): String
+  -getRandomCode(): String
+  -arrayContains(int[], int): boolean
+}
+
+class MediumComputerAI {
+  -guessSet: List<String>
+  +makeGuess(): String
+}
+
+class HardComputerAI {
+  -guessSet: List<String>
+  +makeGuess(): String
+}
+
+class fileGuessesPlayer {
+  -guessesFromFile: List<String>
+  -currentGuessIndex: int
+  +fileGuessesPlayer(String)
+  -readGuessesFromFile(String): List<String>
+  +makeGuess(): String
+}
+
+Game --> HumanPlayer
+Game --> ComputerAI
+Game --> fileGuessesPlayer
+Player <|-- HumanPlayer
+Player <|-- ComputerAI
+ComputerAI <|-- MediumComputerAI
+ComputerAI <|-- HardComputerAI
+HumanPlayer <|-- fileGuessesPlayer
+
+
+@enduml
+
