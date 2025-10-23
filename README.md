@@ -1,4 +1,4 @@
-# industry-mini-project
+# University-mini-project-java
 
 
 
